@@ -1,0 +1,241 @@
+﻿##BASIC GIT COMMANDS
+1. Create a Repository on GitHub
+2. Initialize Git in Your Local Project Folder
+cd path/to/your/project
+git init
+3. Connect Local Repo to GitHub
+git remote add origin https://github.com/your-username/my-project.git
+4. Stage and Commit Your Files
+git add .
+git commit -m "Initial commit"
+5. Push to GitHub
+If your GitHub repo is empty:
+git push -u origin master
+For newer default branches (GitHub uses `main`):
+git branch -M main
+git push -u origin main
+6. Typical Workflow After Initial Push
+Modify or add files
+git status         # Check what's changed
+git add <file>     # Stage specific file
+git add .          # Stage all changes
+git commit -m "Describe your changes"
+git push           # Push to remote
+7. Working with Branches
+git branch <branch-name>         # Create branch
+git checkout <branch-name>       # Switch to branch
+git checkout -b <branch-name>    # Create and switch
+git push -u origin <branch-name> # Push branch to GitHub
+8. Merge and Pull
+git checkout main
+git pull origin main              # Update local main
+git merge <branch-name>           # Merge another branch
+9. Clone a GitHub Repo
+git clone https://github.com/user/repo.git
+10. Undoing Mistakes
+git reset <file>           # Unstage file
+git checkout -- <file>     # Discard changes
+git reset --hard HEAD      # Reset all changes
+
+
+
+##CREATE AND FORK REPOSITORIES, APPLY BRANCH MERGE,REBASE 
+1. Create a Repository on GitHub
+Then in terminal:
+git init
+git remote add origin https://github.com/your-username/your-repo.git
+2. Fork a Repository
+	1. Navigate to another user’s repo (e.g., [https://github.com/someone/project](https://github.com/someone/project))
+	2. Click "Fork" (top-right)
+	3. GitHub will copy it to your account.
+Clone the fork:
+git clone https://github.com/your-username/forked-repo.git
+git remote add upstream https://github.com/original-owner/project.git
+git fetch upstream
+3. Create & Work on a Branch
+git checkout -b feature/login
+Make changes, then: EG. vi javaprac
+git add .
+git commit -m "Add login feature"
+4. Merge Branches
+git checkout main
+git merge feature/login
+git push origin main
+Or via GitHub Pull Request:
+1. Push branch: `git push origin feature/login`
+2. Open PR on GitHub → Merge
+5. Rebase Instead of Merge
+git checkout feature/login
+git rebase main  # Replay commits from feature/login on top of main
+Then merge:
+git checkout main
+git merge feature/login
+Or if already pushed:
+git push --force  
+
+
+##USING GIT FOR COLLABORATION
+1. Clone the Project
+git clone https://github.com/user/repo.git
+cd repo
+2. Create a Branch for Your Work
+git checkout -b feature/your-feature
+3. Make Changes Locally
+git add .
+git commit -m "Describe what you did"
+4. Push Your Branch to GitHub
+git push origin feature/your-feature
+5. Create a Pull Request (PR)
+On GitHub:
+* Go to the repo.
+* You’ll see a prompt to create a PR from your branch.
+* Open the PR → teammates can review, comment, and approve.
+6. Sync Regularly with Main
+git checkout main
+git pull origin main
+git checkout feature/your-feature
+git rebase main  # or use merge: git merge main
+7. After PR Approval
+git checkout main
+git merge feature/your-feature
+git push origin main
+8. Clean Up
+git branch -d feature/your-feature
+git push origin --delete feature/your-feature
+
+
+##COLLABORATING AND CLONING USING GITHUB
+1. Collaborating on GitHub (as a team member)
+A. Get Access
+You need to be added as a **collaborator**:
+* The repo owner goes to **Settings → Collaborators** and adds your GitHub username.
+* You accept the invitation via email or GitHub.
+B. Clone the Repository
+git clone https://github.com/owner/repo-name.git
+cd repo-name
+C. Create Your Own Branch
+git checkout -b feature/my-task
+D. Make Changes and Commit
+Edit project files, then: vi javaprac
+git add .
+git commit -m "Add my feature"
+E. Push Your Branch
+git push origin feature/my-task
+F. Open a Pull Request (PR)
+1. Go to the GitHub repo in the browser.
+2. GitHub will suggest opening a PR from your branch.
+3. Add a title and description.
+4. Submit the PR for review.
+G. Review & Merge
+
+2. Collaborating via Forks (when you're NOT a direct collaborator)
+A. Fork the Repo
+1. Go to the original repo.
+2. Click Fork (top-right).
+3. This creates a copy under your GitHub account.
+B. Clone Your Fork
+git clone https://github.com/your-username/forked-repo.git
+C. Add the Original Repo as "Upstream"
+git remote add upstream https://github.com/original-owner/repo.git
+git fetch upstream
+D. Work on a Branch, Commit, Push, PR
+git checkout -b feature/update
+git add .
+git commit -m "Add something"
+git push origin feature/update
+
+
+##USING GITLAB WEB IDLE (NOT SURE IF THIS IS CORRECT)
+cd c:
+mkdir JavaProg
+cd JavaProg
+git clone https://github.com/Bella1131/main.git
+cd main1
+vi JavaDemo.java
+git add .
+git commit -m “add by local machine..”
+git push origin main
+
+
+
+##PERFORMING MERGE REQUESTS USING GITLAB (CHECJ JOURNAL)
+git checkout -b my-feature-branch
+vi JavaDemo.java
+git add .
+git commit -m "Add new feature to JavaDemo"
+git push origin my-feature-branch
+Create a Merge Request in GitLab
+1. Create a new account on Gitlab.
+2. Import the project from Github
+3. Go to your GitLab repository in a web browser.
+4. GitLab usually shows a prompt:
+5. "Your branch has recent pushes. Create a merge request."
+6. Click "Create merge request" or go to Merge Requests > New Merge Request.
+Choose:
+Fill in:
+1. Title: What the MR is about
+2. Description: Details of what you changed and why
+Assign:
+1. Reviewers or team members
+2. Labels or milestones, if needed
+3. Click "Submit merge request."
+
+
+##WORKFLOW MANAGEMENT IN GITLAB
+STEP 1: Create a New Issue (Planning Phase)
+1. Go to Issues > New Issue
+2. Describe the feature/bug and assign labels (e.g., feature, bug, to do)
+3. Assign the issue to a team member and set milestones
+STEP 2: Create a Feature Branch (Development Phase)
+1. Developers clone the repo and create a new branch for the issue:
+git checkout -b feature/issue-name
+STEP 3: Make Changes and Commit
+1. Edit your code, then:
+vi JavaDemo.java
+git add .
+git commit -m "Add feature issue"
+git push origin feature/feature
+STEP 4: Create a Merge Request
+1. GitLab suggests creating a Merge Request (MR) after you push
+2. Fill in title, description, and link the MR to the issue (Closes #issue_number)
+3. Assign reviewers and request approvals
+STEP 5: Code Review and Approval
+1. Reviewers comment, request changes, or approve the MR
+2. You resolve discussions, push updates, and re-request review if needed
+STEP 6: Merge to Target Branch
+1. Once approved, the MR is merged into the main, develop, or release branch
+STEP 7: Deploy
+1. Code can be automatically deployed via GitLab CI/CD pipelines
+2. Pipelines run jobs like testing, build, and deploy as defined in .gitlab-ci.yml
+STEP 8: Monitor and Track
+1. Use GitLab's Boards, Milestones, and Activity Logs to track progress
+2. Assign team roles for better collaboration
+
+
+##DEMONSTRATE CONTINUOUS INTEGRATION AND DEVELOPMENT USING JENKINS
+su root
+sudo apt install openjdk-17-jdk
+java -version
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+sudo apt-get update
+ps -ef | grep unattended-upgr
+sudo kill -9 6502
+sudo apt-get install jenkins
+jenkins --version
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+Open browser and run localhost:8080
+sudo cat /var/lib/Jenkins/secrets/initialAdminPassword
+Copy the password and paste it in browser.
+sudo ufw allow 8080/tcp
+Open your main machine’s browser and search ip of guestpc:8080
+
+
+##DOCKER COMMANDS FOR CONTENT MANAGEMENT ( GOOGLE CHATGPT )
+
+##SIMPLE CONTAINERIZED APPLICATION USING DOCKER ( GOOGLE CHATGPT )
+
+##AD-HOC ANSIBLE COMMANDS ( GOOGLE CHATGPT)
+
+##ANSIBLE PLAYBOOKS (JOURNAL ONLY)
